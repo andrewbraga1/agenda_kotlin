@@ -37,26 +37,8 @@ class MainActivity : AppCompatActivity() {
     private var contactsAppDatabase: ContactsAppDatabase? = null
 
     internal var callback: RoomDatabase.Callback = object : RoomDatabase.Callback() {
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-
-            //Toast.makeText(getApplicationContext()," On Create Called ",Toast.LENGTH_LONG).show();
-            Log.i(TAG, " on create invoked ")
-
-            createContact("name 1", "email 1")
-            createContact("name 2", "email 2")
-            createContact("name 3", "email 3")
-
-
-        }
-
-
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
-
-            //  Toast.makeText(getApplicationContext()," On Create Called ",Toast.LENGTH_LONG).show();
-            Log.i(TAG, " on open invoked ")
-
         }
 
     }
@@ -67,13 +49,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        supportActionBar!!.setTitle(" Contacts Manager ")
 
         recyclerView = findViewById(R.id.recycler_view_contacts)
         contactsAppDatabase = Room.databaseBuilder<ContactsAppDatabase>(applicationContext, ContactsAppDatabase::class.java, "ContactDB").addCallback(callback).build()
 
 
-
+        // Carregar todos os contatos salvos
         GetAllContactsAsyncTask().execute()
 
         contactsAdapter = ContactsAdapter(this, contactArrayList, this@MainActivity)
@@ -82,33 +63,18 @@ class MainActivity : AppCompatActivity() {
         recyclerView!!.itemAnimator = DefaultItemAnimator()
         recyclerView!!.adapter = contactsAdapter
 
-
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { addAndEditContacts(false, null, -1) }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        val id = item.itemId
-
-
-        return if (id == R.id.action_settings) {
-            true
-        } else super.onOptionsItemSelected(item)
-
+        fab.setOnClickListener { addOrEditContacts(false, null, -1) }
     }
 
 
-    fun addAndEditContacts(isUpdate: Boolean, contact: Contact?, position: Int) {
+    // Métodos responável pelo adicionar ou pelo atualizar a depender da origem do comando
+    fun addOrEditContacts(isUpdate: Boolean, contact: Contact?, position: Int) {
         val layoutInflaterAndroid = LayoutInflater.from(applicationContext)
         val view = layoutInflaterAndroid.inflate(R.layout.layout_add_contact, null)
 
+
+        //Criação de modal
         val alertDialogBuilderUserInput = AlertDialog.Builder(this@MainActivity)
         alertDialogBuilderUserInput.setView(view)
 
@@ -116,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         val newContact = view.findViewById<EditText>(R.id.name)
         val contactEmail = view.findViewById<EditText>(R.id.email)
 
-        contactTitle.text = if (!isUpdate) "Add New Contact" else "Edit Contact"
+        contactTitle.text = if (!isUpdate) contactTitle.text else "Edit Contact"
 
         if (isUpdate && contact != null) {
             newContact.setText(contact.name)
@@ -124,18 +90,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         alertDialogBuilderUserInput
-                .setCancelable(false)
-                .setPositiveButton(if (isUpdate) "Update" else "Save") { dialogBox, id -> }
-                .setNegativeButton("Delete"
+                .setCancelable(true)
+                .setPositiveButton("OK") { dialogBox, id -> }
+                .setNegativeButton("Cancel"
                 ) { dialogBox, id ->
-                    if (isUpdate) {
 
-                        deleteContact(contact, position)
-                    } else {
-
-                        dialogBox.cancel()
-
-                    }
+                    dialogBox.cancel()
                 }
 
 
@@ -144,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(View.OnClickListener {
             if (TextUtils.isEmpty(newContact.text.toString())) {
-                Toast.makeText(this@MainActivity, "Enter contact name!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "You must enter a contact!", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             } else {
                 alertDialog.dismiss()
@@ -162,10 +122,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun deleteContact(contact: Contact?, position: Int) {
+        val layoutInflaterAndroid = LayoutInflater.from(applicationContext)
+        val view = layoutInflaterAndroid.inflate(R.layout.layout_confirm_delete_contact, null)
 
-        contactArrayList.removeAt(position)
 
-        DeleteContactAsyncTask().execute(contact)
+        //Criação de modal
+        val alertDialogBuilderUserInput = AlertDialog.Builder(this@MainActivity)
+        alertDialogBuilderUserInput.setView(view)
+
+        alertDialogBuilderUserInput
+                .setCancelable(true)
+                .setPositiveButton("OK") { dialogBox, id ->
+                    contactArrayList.removeAt(position)
+
+                    DeleteContactAsyncTask().execute(contact)
+                }
+                .setNegativeButton("Cancel"
+                ) { dialogBox, id ->
+
+                    dialogBox.cancel()
+                }
+
+
+        val alertDialog = alertDialogBuilderUserInput.create()
+        alertDialog.show()
+
+
+
     }
 
     private fun updateContact(name: String, email: String, position: Int) {

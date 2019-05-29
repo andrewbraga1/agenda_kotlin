@@ -20,12 +20,12 @@ class ContactsAdapter(private val context: Context, private val contactssList: A
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         var name: TextView
-        var emil: TextView
+        var email: TextView
 
 
         init {
             name = view.findViewById(R.id.name)
-            emil = view.findViewById(R.id.email)
+            email = view.findViewById(R.id.email)
 
         }
     }
@@ -43,9 +43,13 @@ class ContactsAdapter(private val context: Context, private val contactssList: A
         val contact = contactssList[position]
 
         holder.name.text = contact.name
-        holder.emil.text = contact.email
+        holder.email.text = contact.email
 
-        holder.itemView.setOnClickListener { mainActivity.addAndEditContacts(true, contact, position) }
+        holder.itemView.setOnClickListener { mainActivity.addOrEditContacts(true, contact, position) }
+
+        // Configurando itens da lista para serem longClickable
+        holder.itemView.isLongClickable = true
+        holder.itemView.setOnLongClickListener { mainActivity.deleteContact(contact, position);true}
 
     }
 
