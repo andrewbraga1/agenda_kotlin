@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setTitle(" Contacts Manager ")
 
         recyclerView = findViewById(R.id.recycler_view_contacts)
-        contactsAppDatabase = Room.databaseBuilder<ContactsAppDatabase>(applicationContext, ContactsAppDatabase::class.java!!, "ContactDB").addCallback(callback).build()
+        contactsAppDatabase = Room.databaseBuilder<ContactsAppDatabase>(applicationContext, ContactsAppDatabase::class.java, "ContactDB").addCallback(callback).build()
 
 
 
@@ -194,14 +194,14 @@ class MainActivity : AppCompatActivity() {
     private inner class GetAllContactsAsyncTask : AsyncTask<Void, Void, Void>() {
 
 
-        override fun doInBackground(vararg voids: Void): Void? {
+        override fun doInBackground(vararg voids: Void?): Void? {
 
             contactArrayList.addAll(contactsAppDatabase!!.contactDAO.contacts)
             return null
         }
 
 
-        override fun onPostExecute(aVoid: Void) {
+        override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
 
             contactsAdapter!!.notifyDataSetChanged()
@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        override fun onPostExecute(aVoid: Void) {
+        override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
 
             contactsAdapter!!.notifyDataSetChanged()
@@ -246,7 +246,7 @@ class MainActivity : AppCompatActivity() {
             return null
         }
 
-        override fun onPostExecute(aVoid: Void) {
+        override fun onPostExecute(aVoid: Void?) {
             super.onPostExecute(aVoid)
             contactsAdapter!!.notifyDataSetChanged()
         }
