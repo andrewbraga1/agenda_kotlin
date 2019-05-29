@@ -1,4 +1,4 @@
-package com.thiago.unifor.javaapp.db;
+package com.agenda.kotlin.app.db;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.thiago.unifor.javaapp.db.entity.Contact;
+import com.agenda.kotlin.app.db.entity.Contact;
 
 import java.util.List;
 

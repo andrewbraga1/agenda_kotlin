@@ -1,4 +1,4 @@
-package com.thiago.unifor.contactmanager;
+package com.agenda.kotlin.contactmanager;
 
 import org.junit.Test;
 

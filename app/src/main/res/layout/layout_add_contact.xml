@@ -7,12 +7,13 @@
     android:padding="10dp"
     >
 
-    <TextView android:id="@+id/new_contact_title"
+    <TextView
+        android:id="@+id/new_contact_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:lineSpacingExtra="10sp"
-        android:text="New Contact"
+        android:text="Add Contact"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:gravity="top"
-        android:hint=" Contact Name "
+        android:hint="Name "
         android:inputType="textCapSentences|textMultiLine"
         android:lines="4"
         android:textSize="16sp" />
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:gravity="top"
-        android:hint=" Contact Email "
+        android:hint="Email"
         android:inputType="textCapSentences|textMultiLine"
         android:lines="4"
         android:textSize="16sp" />

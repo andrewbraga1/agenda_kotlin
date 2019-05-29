@@ -1,4 +1,4 @@
-package com.thiago.unifor.contactmanager;
+package com.agenda.kotlin.contactmanager;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

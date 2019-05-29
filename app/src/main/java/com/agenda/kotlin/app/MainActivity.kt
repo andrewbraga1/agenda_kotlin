@@ -1,4 +1,4 @@
-package com.thiago.unifor.javaapp
+package com.agenda.kotlin.app
 
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
@@ -13,19 +13,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.thiago.unifor.contactmanager.R
+import com.agenda.kotlin.contactmanager.R
 
-import com.thiago.unifor.javaapp.adapter.ContactsAdapter
-import com.thiago.unifor.javaapp.db.ContactsAppDatabase
-import com.thiago.unifor.javaapp.db.entity.Contact
+import com.agenda.kotlin.app.adapter.ContactsAdapter
+import com.agenda.kotlin.app.db.ContactsAppDatabase
+import com.agenda.kotlin.app.db.entity.Contact
 
 import java.util.ArrayList
 

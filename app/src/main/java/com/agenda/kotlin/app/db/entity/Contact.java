@@ -1,4 +1,4 @@
-package com.thiago.unifor.javaapp.db.entity;
+package com.agenda.kotlin.app.db.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

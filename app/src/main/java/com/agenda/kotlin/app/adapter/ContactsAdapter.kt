@@ -1,4 +1,4 @@
-package com.thiago.unifor.javaapp.adapter
+package com.agenda.kotlin.app.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 
-import com.thiago.unifor.javaapp.MainActivity
-import com.thiago.unifor.contactmanager.R
-import com.thiago.unifor.javaapp.db.entity.Contact
+import com.agenda.kotlin.app.MainActivity
+import com.agenda.kotlin.contactmanager.R
+import com.agenda.kotlin.app.db.entity.Contact
 
 import java.util.ArrayList
 
