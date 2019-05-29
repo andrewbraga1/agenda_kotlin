@@ -1,9 +1,8 @@
-package com.anushka.androidtutz.contactmanager
+package com.thiago.unifor.javaapp
 
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
-import android.content.DialogInterface
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -22,10 +21,11 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.thiago.unifor.contactmanager.R
 
-import com.anushka.androidtutz.contactmanager.adapter.ContactsAdapter
-import com.anushka.androidtutz.contactmanager.db.ContactsAppDatabase
-import com.anushka.androidtutz.contactmanager.db.entity.Contact
+import com.thiago.unifor.javaapp.adapter.ContactsAdapter
+import com.thiago.unifor.javaapp.db.ContactsAppDatabase
+import com.thiago.unifor.javaapp.db.entity.Contact
 
 import java.util.ArrayList
 
@@ -85,7 +85,6 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { addAndEditContacts(false, null, -1) }
-        fab.setOnLongClickListener{ deleteContact(null, false)}
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

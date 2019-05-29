@@ -1,4 +1,4 @@
-package com.anushka.androidtutz.contactmanager.adapter
+package com.thiago.unifor.javaapp.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 
-import com.anushka.androidtutz.contactmanager.MainActivity
-import com.anushka.androidtutz.contactmanager.R
-import com.anushka.androidtutz.contactmanager.db.entity.Contact
+import com.thiago.unifor.javaapp.MainActivity
+import com.thiago.unifor.contactmanager.R
+import com.thiago.unifor.javaapp.db.entity.Contact
 
 import java.util.ArrayList
 

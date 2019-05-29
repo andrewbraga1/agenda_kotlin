@@ -1,4 +1,4 @@
-package com.anushka.androidtutz.contactmanager;
+package com.thiago.unifor.contactmanager;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

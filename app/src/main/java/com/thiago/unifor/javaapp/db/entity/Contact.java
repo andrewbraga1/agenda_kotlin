@@ -1,4 +1,4 @@
-package com.anushka.androidtutz.contactmanager.db.entity;
+package com.thiago.unifor.javaapp.db.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
